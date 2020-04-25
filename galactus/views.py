@@ -24,7 +24,10 @@ def galactus(req, query):
     response = {}
 
     for url in urls:
-        d = scrape(url)
+        try:
+            d = scrape(url)
+        except:
+            continue
 
         for patterns, fun in PATTERNS.items():
             if isinstance(patterns, str):
