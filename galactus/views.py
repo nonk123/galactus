@@ -39,6 +39,8 @@ def galactus(req, query):
                 if items:
                     for k, v in fun(d, items).items():
                         if k not in response or len(v) > len(response[k]):
+                            if isinstance(v, str):
+                                v = v.strip()
                             response[k] = v
 
     return JsonResponse(response)
