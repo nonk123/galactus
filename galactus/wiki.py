@@ -44,7 +44,7 @@ def scrape_date(td):
     if td.find("br"):
         return parse_br(td.text())["date_raw"]
     else:
-        return text_nodes_without_children(td.text())[0]
+        return text_nodes_without_children(td)[0]
 
 def scrape_born(born, response):
     name = scrape_name(born)
