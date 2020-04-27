@@ -3,7 +3,7 @@ import re
 from .util import text_without_children, text_nodes_without_children
 
 def parse_br(text):
-    split = re.split("\n+", text)
+    split = re.split("\n+", text, 3)
 
     ret = {}
 
@@ -112,6 +112,6 @@ def scrape_bio(d, items):
         header = elts("th, h3").text()
 
         if header in scrapers:
-            scrapers[header](elts("td, div"), response)
+            scrapers[header](elts("td, div").eq(0), response)
 
     return response

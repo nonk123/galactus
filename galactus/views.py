@@ -12,7 +12,7 @@ UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:65.0) Gecko/20100101 Fire
 def scrape(url):
     return pq(requests.get(url, headers={"user-agent": UA}).content)
 
-PATTERNS = {
+site_patterns = {
     wiki.patterns: wiki.scrape_bio
 }
 
@@ -29,7 +29,7 @@ def galactus(req, query):
         except:
             continue
 
-        for patterns, fun in PATTERNS.items():
+        for patterns, site in site_patterns.items():
             if isinstance(patterns, str):
                 patterns = [patterns]
 
@@ -37,7 +37,7 @@ def galactus(req, query):
                 items = d.items(pattern)
 
                 if items:
-                    for k, v in fun(d, items).items():
+                    for k, v in site(d, items).items():
                         if k not in response or len(v) > len(response[k]):
                             if isinstance(v, str):
                                 v = v.strip()
